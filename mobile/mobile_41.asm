@@ -1012,47 +1012,8 @@ Function106453:
 	ret
 
 Stubbed_Function106462:
-	ret
-	ret
-
 Function106464::
-	ld de, FontsExtra_SolidBlackGFX
-	ld hl, vTiles2 tile "■" ; $60
-	lb bc, BANK(FontsExtra_SolidBlackGFX), 1
-	call Get2bpp
-	ld de, FontsExtra2_UpArrowGFX
-	ld hl, vTiles2 tile "▲" ; $61
-	lb bc, BANK(FontsExtra2_UpArrowGFX), 1
-	call Get2bpp
-	ld de, MobileDialingFrameGFX
-	ld hl, vTiles2 tile "☎" ; $62
-	ld c, 9
-	ld b, BANK(MobileDialingFrameGFX)
-	call Get2bpp
-	ld de, $40b0
-	ld hl, vTiles2 tile $6b
-	ld b, $0f ; no graphics at 0f:40b0; JP leftover???
-	call Get2bpp
-	farcall LoadFrame
-	ret
-
-Function10649b: ; unreferenced
-	ld a, [wTextboxFrame]
-	maskbits NUM_FRAMES
-	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE
-	ld hl, Frames
-	call AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, vTiles2 tile "┌" ; $79
-	ld c, TEXTBOX_FRAME_TILES ; "┌" to "┘"
-	ld b, BANK(Frames)
-	call Function1064c3
-	ld hl, vTiles2 tile " " ; $7f
-	ld de, TextboxSpaceGFX
-	ld c, 1
-	ld b, BANK(TextboxSpaceGFX)
-	call Function1064c3
+Function10649b:
 	ret
 
 Function1064c3:
