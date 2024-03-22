@@ -324,10 +324,10 @@ ReloadSpritesNoPalettes::
 	call DelayFrame
 	ret
 
-LoadOverworldAttrmapPals::
-	homecall _LoadOverworldAttrmapPals
-	ret
+; LoadOverworldAttrmapPals::
+	; homecall _LoadOverworldAttrmapPals
+	; ret
 
-ScrollBGMapPalettes::
-	homecall _ScrollBGMapPalettes
-	ret
+; ScrollBGMapPalettes::
+	; homecall _ScrollBGMapPalettes
+	; ret

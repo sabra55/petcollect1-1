@@ -5,7 +5,7 @@ _TitleScreen:
 
 ; Turn BG Map update off
 	xor a
-	ldh [hBGMapMode], a
+	ldh [hBGMapMode], a\
 
 ; Reset timing variables
 	ld hl, wJumptableIndex
@@ -22,9 +22,9 @@ _TitleScreen:
 	ldh [rVBK], a
 
 ; Decompress running Suicune gfx
-	ld hl, TitleSuicuneGFX
-	ld de, vTiles1
-	call Decompress
+	; ld hl, TitleSuicuneGFX
+	; ld de, vTiles1
+	; call Decompress
 
 ; Clear screen palettes
 	hlbgcoord 0, 0
@@ -61,14 +61,14 @@ _TitleScreen:
 	ld bc, BG_MAP_WIDTH
 	ld a, 4
 	call ByteFill
-; line 7
+; lines 7-11
 	hlbgcoord 0, 7
 	ld bc, BG_MAP_WIDTH
 	ld a, 5
 	call ByteFill
-; lines 8-9
-	hlbgcoord 0, 8
-	ld bc, 2 * BG_MAP_WIDTH
+; line 12
+	hlbgcoord 0, 12
+	ld bc, 7 * BG_MAP_WIDTH
 	ld a, 6
 	call ByteFill
 
@@ -79,13 +79,13 @@ _TitleScreen:
 	call ByteFill
 
 ; Suicune gfx
-	hlbgcoord 0, 12
-	ld bc, 6 * BG_MAP_WIDTH ; the rest of the screen
-	ld a, 0 | VRAM_BANK_1
-	call ByteFill
+	; hlbgcoord 0, 12
+	; ld bc, 6 * BG_MAP_WIDTH ; the rest of the screen
+	; ld a, 0 | VRAM_BANK_1
+	; call ByteFill
 
 ; Back to VRAM bank 0
-	ld a, 0
+	xor a
 	ldh [rVBK], a
 
 ; Decompress logo
@@ -119,11 +119,11 @@ _TitleScreen:
 	call DrawTitleGraphic
 
 ; Initialize running Suicune?
-	ld d, $0
-	call LoadSuicuneFrame
+	;ld d, $0
+	;call LoadSuicuneFrame
 
 ; Initialize background crystal
-	call InitializeBackground
+	;call InitializeBackground
 
 ; Update palette colors
 	ldh a, [rSVBK]
@@ -180,13 +180,9 @@ _TitleScreen:
 	pop af
 	ldh [rSVBK], a
 
-; Reset audio
-	call ChannelsOff
-	call EnableLCD
-
-; Set sprite size to 8x16
+; Set sprite size to 8x8
 	ldh a, [rLCDC]
-	set rLCDC_SPRITE_SIZE, a
+	res rLCDC_SPRITE_SIZE, a
 	ldh [rLCDC], a
 
 	ld a, +112
@@ -203,9 +199,10 @@ _TitleScreen:
 
 ; Update BG Map 0 (bank 0)
 	ldh [hBGMapMode], a
-
-	xor a
-	ld [wSuicuneFrame], a
+	
+; Reset audio
+	call ChannelsOff
+	call EnableLCD
 
 ; Play starting sound effect
 	call SFXChannelsOff
@@ -215,63 +212,11 @@ _TitleScreen:
 	ret
 
 SuicuneFrameIterator:
-	ld hl, wSuicuneFrame
-	ld a, [hl]
-	ld c, a
-	inc [hl]
-
-; Only do this once every eight frames
-	and %111
-	ret nz
-
-	ld a, c
-	and %11000
-	sla a
-	swap a
-	ld e, a
-	ld d, 0
-	ld hl, .Frames
-	add hl, de
-	ld d, [hl]
-	xor a
-	ldh [hBGMapMode], a
-	call LoadSuicuneFrame
-	ld a, $1
-	ldh [hBGMapMode], a
-	ld a, $3
-	ldh [hBGMapThird], a
 	ret
-
-.Frames:
-	db $80 ; vTiles3 tile $80
-	db $88 ; vTiles3 tile $88
-	db $00 ; vTiles5 tile $00
-	db $08 ; vTiles5 tile $08
 
 LoadSuicuneFrame:
-	hlcoord 6, 12
-	ld b, 6
-.bgrows
-	ld c, 8
-.col
-	ld a, d
-	ld [hli], a
-	inc d
-	dec c
-	jr nz, .col
-	ld a, SCREEN_WIDTH - 8
-	add l
-	ld l, a
-	ld a, 0
-	adc h
-	ld h, a
-	ld a, 8
-	add d
-	ld d, a
-	dec b
-	jr nz, .bgrows
 	ret
-
+	
 DrawTitleGraphic:
 ; input:
 ;   hl: draw location
@@ -360,9 +305,6 @@ endr
 	jr nz, .loop
 
 	ret
-
-TitleSuicuneGFX:
-INCBIN "gfx/title/suicune.2bpp.lz"
 
 TitleLogoGFX:
 INCBIN "gfx/title/logo.2bpp.lz"

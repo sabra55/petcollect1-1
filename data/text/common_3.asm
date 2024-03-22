@@ -1524,3 +1524,17 @@ _MomLostGearBookletText::
 	para "Come back again in"
 	line "a while."
 	prompt
+
+_LoremIpsumText::
+	text "Lorem ipsum dolor"
+	line "sit amet consecte-"
+	
+	para "tur adipiscing e-"
+	line "lit, sed do eius-"
+	
+	para "mod tempor incidi-"
+	line "dunt ut labore et"
+	
+	para "dolore magna ali-"
+	line "qua."
+	done

@@ -148,6 +148,7 @@ INCLUDE "audio/music/mobileadapter.asm"
 SECTION "Extra Songs 2", ROMX
 
 INCLUDE "audio/music/postcredits.asm"
+INCLUDE "audio/music/mystery.asm"
 
 
 SECTION "Sound Effects", ROMX

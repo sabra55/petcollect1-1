@@ -317,8 +317,9 @@ ROMX $7d
 ROMX $7e
 	"Crystal Events"
 ROMX $7f
-	org $7de0
-	"Stadium 2 Checksums"
+	"MBC30 Detection"
+ROMX $80
+	"MBC30 Data"
 WRAM0
 	"Stack"
 	"Audio RAM"
@@ -342,6 +343,7 @@ WRAMX 1
 	"Party"
 WRAMX 2
 	"Pic Animations"
+	"Surrounding Data"
 WRAMX 3
 	"Battle Tower RAM"
 WRAMX 4

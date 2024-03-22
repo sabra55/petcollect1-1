@@ -113,6 +113,7 @@
 	charmap "v",         $b5
 	charmap "w",         $b6
 	charmap "x",         $b7
+	charmap "×",         $b7
 	charmap "y",         $b8
 	charmap "z",         $b9
 	
@@ -172,7 +173,7 @@
 	charmap "▼",         $ee
 	charmap "♂",         $ef
 	charmap "¥",         $f0 ; Poké Dollar sign
-	charmap "×",         $f1
+	charmap "♥",         $f1
 	charmap "…",         $f2 ; ellipsis
 	charmap "/",         $f3
 	charmap ",",         $f4

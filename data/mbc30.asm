@@ -1,0 +1,2 @@
+MBC30Data::
+	db "CRYSTALMOON"

@@ -192,8 +192,6 @@ INCLUDE "engine/events/buena_menu.asm"
 
 SECTION "bank13", ROMX
 
-INCLUDE "engine/tilesets/map_palettes.asm"
-INCLUDE "gfx/tileset_palette_maps.asm"
 INCLUDE "data/collision/collision_permissions.asm"
 INCLUDE "engine/menus/empty_sram.asm"
 INCLUDE "engine/menus/savemenu_copytilemapatonce.asm"
@@ -223,7 +221,6 @@ INCLUDE "engine/events/battle_tower/get_trainer_class.asm"
 INCLUDE "engine/battle/sliding_intro.asm"
 INCLUDE "mobile/print_opp_message.asm"
 INCLUDE "engine/battle/check_battle_scene.asm"
-INCLUDE "engine/movie/gbc_only.asm"
 INCLUDE "engine/events/poke_seer.asm"
 
 
@@ -683,12 +680,12 @@ INCLUDE "engine/events/battle_tower/load_trainer.asm"
 INCLUDE "engine/events/odd_egg.asm"
 
 
-SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
+SECTION "MBC30 Detection", ROMX
 
-; The end of the ROM is taken up by checksums of the content, apparently used
-; by Pokémon Stadium 2 due to the checksums' "N64PS3" header. (In Japan,
-; Pokémon Stadium Gold and Silver was the third Stadium release for N64.)
-; This SECTION reserves space for those checksums.
-; If it is removed, also remove the "tools/stadium" command in the Makefile.
+INCLUDE "engine/movie/mbc30.asm"
+INCLUDE "engine/movie/gbc_only.asm"
 
-	ds $220
+
+SECTION "MBC30 Data", ROMX
+
+INCLUDE "data/mbc30.asm"
